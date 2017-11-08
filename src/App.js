@@ -10,8 +10,13 @@ class App extends Component {
       videos : {
         video1 : {
           name: 'Rip Video 123',
-          url: 'https://www.youtube.com/embed/m1S_BU3i6Uk?rel=0&amp;showinfo=0',
-          description: 'malachai act 4 normal rip'
+          url: 'https://clips.twitch.tv/embed?clip=DaintyGlamorousNightingaleMikeHogu&autoplay=false&tt_medium=clips_embed',
+          description: 'ziz ded'
+        },
+        video2 : {
+          name: 'Rip again',
+          url: 'https://www.youtube.com/embed/9IxXHFPohE4',
+          description: 'best deaths'
         }
       }
     }
@@ -25,7 +30,25 @@ class App extends Component {
           <h2>Welcome to React</h2>
         </div>
         <div class="vidcontainer">
-          <iframe class="video" src={this.state.videos.video1.url} frameborder="0" allowfullscreen></iframe>
+          <h2>{this.state.videos.video1.name}</h2>
+          <iframe src={this.state.videos.video1.url}
+            width="640"
+            height="360"
+            frameborder="0"
+            scrolling="no"
+            allowfullscreen="true"></iframe>
+          <h3>{this.state.videos.video1.description}</h3>
+        </div>
+        <div class="vidcontainer">
+          <h2>{this.state.videos.video2.name}</h2>
+          <iframe
+            src={this.state.videos.video2.url}
+            width="640"
+            height="360"
+            frameborder="0"
+            scrolling="no"
+            allowfullscreen="true"></iframe>
+            <h3>{this.state.videos.video2.description}</h3>
         </div>
       </div>
     );
