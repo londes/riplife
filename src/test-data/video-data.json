@@ -1,0 +1,16 @@
+{
+    "videos" : [
+      {
+        "id": "video1",
+        "name": "Rip Video 123",
+        "url": "https://clips.twitch.tv/embed?clip=DaintyGlamorousNightingaleMikeHogu&autoplay=false&tt_medium=clips_embed",
+        "description": "ziz ded"
+      },
+      {
+        "id" : "video2",
+        "name": "Rip again",
+        "url": "https://www.youtube.com/embed/9IxXHFPohE4",
+        "description": "best deaths"
+      }
+    ]
+}

@@ -7,18 +7,59 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      videos : {
-        video1 : {
-          name: 'Rip Video 123',
-          url: 'https://clips.twitch.tv/embed?clip=DaintyGlamorousNightingaleMikeHogu&autoplay=false&tt_medium=clips_embed',
-          description: 'ziz ded'
-        },
-        video2 : {
-          name: 'Rip again',
-          url: 'https://www.youtube.com/embed/9IxXHFPohE4',
-          description: 'best deaths'
-        }
-      }
+      fetching: true,
+      inventory: null,
+    }
+  }
+
+  componentWillMount() {
+    fetch('http://localhost:8000/videos')
+      .then(response => {
+        debugger;
+        return response.json();
+      })
+      .then(responseJson => {
+        console.log(responseJson);
+        this.setState({
+          fetching: false,
+          inventory: responseJson,
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  renderVideos() {
+    if (this.state.inventory) {
+      return (
+        <div>
+        {this.state.inventory.forEach(video) => {
+          
+        }}
+        {/* <div class="vidcontainer">
+          <h2>{this.state.inventory.video1.name}</h2>
+          <iframe src={this.state.inventory.video1.url}
+            width="640"
+            height="360"
+            frameborder="0"
+            scrolling="no"
+            allowfullscreen="true"></iframe>
+          <h3>{this.state.inventory.video1.description}</h3>
+        </div>
+        <div class="vidcontainer">
+          <h2>{this.state.inventory.video2.name}</h2>
+          <iframe
+            src={this.state.inventory.video2.url}
+            width="640"
+            height="360"
+            frameborder="0"
+            scrolling="no"
+            allowfullscreen="true"></iframe>
+          <h3>{this.state.inventory.video2.description}</h3>
+        </div> */}
+        </div>
+      );
     }
   }
 
@@ -27,29 +68,9 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>RIP YOU NUBS</h2>
         </div>
-        <div class="vidcontainer">
-          <h2>{this.state.videos.video1.name}</h2>
-          <iframe src={this.state.videos.video1.url}
-            width="640"
-            height="360"
-            frameborder="0"
-            scrolling="no"
-            allowfullscreen="true"></iframe>
-          <h3>{this.state.videos.video1.description}</h3>
-        </div>
-        <div class="vidcontainer">
-          <h2>{this.state.videos.video2.name}</h2>
-          <iframe
-            src={this.state.videos.video2.url}
-            width="640"
-            height="360"
-            frameborder="0"
-            scrolling="no"
-            allowfullscreen="true"></iframe>
-            <h3>{this.state.videos.video2.description}</h3>
-        </div>
+        {this.renderVideos()}
       </div>
     );
   }
