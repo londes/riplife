@@ -15,7 +15,6 @@ class App extends Component {
   componentWillMount() {
     fetch('http://localhost:8000/videos')
       .then(response => {
-        debugger;
         return response.json();
       })
       .then(responseJson => {
@@ -26,41 +25,45 @@ class App extends Component {
         });
       })
       .catch(err => {
-        console.error(err);
+         console.error(err);
+         throw(err);
       });
+
+    fetch('https://api.twitch.tv/kraken/clips/top?limit=10&game=Overwatch&trending=true')
+      .then(response => {
+        console.log(response);
+        debugger;
+        return response.json();
+      })
+      // var httpRequest = new XMLHttpRequest();
+      // httpRequest.addEventListener('load', clipsLoaded);
+      // httpRequest.open('GET', 'https://api.twitch.tv/kraken/clips/top?limit=10&game=Overwatch&trending=true');
+      // httpRequest.setRequestHeader('Client-ID', 'uo6dggojyb8d6soh92zknwmi5ej1q2');
+      // httpRequest.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json');
+      // httpRequest.send();
   }
 
   renderVideos() {
-    if (this.state.inventory) {
-      return (
-        <div>
-        {this.state.inventory.forEach(video) => {
-          
-        }}
-        {/* <div class="vidcontainer">
-          <h2>{this.state.inventory.video1.name}</h2>
-          <iframe src={this.state.inventory.video1.url}
-            width="640"
-            height="360"
-            frameborder="0"
-            scrolling="no"
-            allowfullscreen="true"></iframe>
-          <h3>{this.state.inventory.video1.description}</h3>
-        </div>
-        <div class="vidcontainer">
-          <h2>{this.state.inventory.video2.name}</h2>
-          <iframe
-            src={this.state.inventory.video2.url}
-            width="640"
-            height="360"
-            frameborder="0"
-            scrolling="no"
-            allowfullscreen="true"></iframe>
-          <h3>{this.state.inventory.video2.description}</h3>
-        </div> */}
-        </div>
-      );
+    if (!this.state.inventory) {
+      return (<div>loading vids</div>);
     }
+
+    return (
+      <div>
+        {this.state.inventory.map((video) => (
+          <div class="vidcontainer">
+            <h2>{video.name}</h2>
+            <iframe src={video.url}
+              width="640"
+              height="360"
+              frameborder="0"
+              scrolling="no"
+              allowfullscreen="false"></iframe>
+            <h3>{video.description}</h3>
+          </div>
+        ))}
+      </div>
+    );
   }
 
   render() {
