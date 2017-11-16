@@ -9,6 +9,7 @@ class App extends Component {
     this.state = {
       fetching: true,
       inventory: null,
+      //twitchvids: null,
     }
   }
 
@@ -29,22 +30,33 @@ class App extends Component {
          throw(err);
       });
 
-    fetch('https://api.twitch.tv/kraken/clips/top?limit=10&game=Overwatch&trending=true')
-      .then(response => {
-        console.log(response);
-        debugger;
-        return response.json();
-      })
-      // var httpRequest = new XMLHttpRequest();
-      // httpRequest.addEventListener('load', clipsLoaded);
-      // httpRequest.open('GET', 'https://api.twitch.tv/kraken/clips/top?limit=10&game=Overwatch&trending=true');
-      // httpRequest.setRequestHeader('Client-ID', 'uo6dggojyb8d6soh92zknwmi5ej1q2');
-      // httpRequest.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json');
-      // httpRequest.send();
+    // fetch('https://api.twitch.tv/kraken/clips/top?limit=10&game=Path%20Of%20Exile&trending=true', {
+    //   headers: {
+    //     'Client-ID': 'ousqrlk5qmygv0cm132y6mq7oehpx4',
+    //     'Accept': 'application/vnd.twitchtv.v5+json',
+    //   },
+    //   method: 'GET',
+    // })
+    //   .then(response => {
+    //     console.log(response);
+    //     debugger;
+    //     return response.json();
+    //   })
+    //   .then(responseJson => {
+    //     console.log(responseJson);
+    //     this.setState({
+    //       twitchvids: responseJson,
+    //     })
+    //     debugger;
+    //   })
+    //   .catch(err => {
+    //      console.error(err);
+    //      throw(err);
+    //   });
   }
 
   renderVideos() {
-    if (!this.state.inventory) {
+    if (!this.state.inventory || !this.state.twitchvids) {
       return (<div>loading vids</div>);
     }
 
