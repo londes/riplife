@@ -1,22 +1,34 @@
 import React, { Component, PropTypes } from 'react';
-import './inputField.css';
+import './InputField.css';
 
 class inputField extends Component {
-  static propTypes = {}
+  constructor (props) {
+    super (props);
+    this.state = {
+      vidLink: '',
+    };
+  };
+  static propTypes = {
+  }
 
-  onItemClicked = () => {
-    this.props.onClickHandler(this.props.count);
+  changeHandler = (event) => {
+    this.setState({vidLink: event.target.value});
+  }
+
+  submitHandle = (event) => {
+    alert('A name was submitted: ' + this.state.vidLink);
+    event.preventDefault();
   }
 
  render() {
   return (
-    <div className="test">
-    <div
-      onClick={this.onItemClicked}
-      className="floating-button">
-      {this.props.count}
-    </div>
-    </div>
+    <form onSubmit={this.submitHandle}>
+      <label>
+        sned noodz:
+        <input type="text" value={this.state.vidLink} onChange={this.changeHandler} />
+      </label>
+      <input type="submit" value="Submit" />
+    </form>
   );
  };
 }

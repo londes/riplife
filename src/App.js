@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import InputField from './components/InputField/InputField'
 import logo from './logo.svg';
 import './App.css';
 
@@ -56,10 +57,10 @@ class App extends Component {
   }
 
   renderVideos() {
-    if (!this.state.inventory || !this.state.twitchvids) {
+    if (!this.state.inventory) {
       return (<div>loading vids</div>);
     }
-
+    
     return (
       <div>
         {this.state.inventory.map((video) => (
@@ -83,7 +84,8 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>RIP YOU NUBS</h2>
+          <h2>rip clips</h2>
+          <InputField/>
         </div>
         {this.renderVideos()}
       </div>
