@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import InputField from './components/InputField/InputField'
-import logo from './logo.svg';
+import InputField from './components/InputField/InputField';
 import './App.css';
 
 class App extends Component {
@@ -9,7 +8,7 @@ class App extends Component {
     super(props);
     this.state = {
       fetching: true,
-      inventory: null,
+      videos: null,
       //twitchvids: null,
     }
   }
@@ -23,7 +22,7 @@ class App extends Component {
         console.log(responseJson);
         this.setState({
           fetching: false,
-          inventory: responseJson,
+          videos: responseJson,
         });
       })
       .catch(err => {
@@ -57,13 +56,13 @@ class App extends Component {
   }
 
   renderVideos() {
-    if (!this.state.inventory) {
+    if (!this.state.videos) {
       return (<div>loading vids</div>);
     }
-    
+
     return (
       <div>
-        {this.state.inventory.map((video) => (
+        {this.state.videos.map((video) => (
           <div class="vidcontainer">
             <h2>{video.name}</h2>
             <iframe src={video.url}
@@ -83,7 +82,6 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h2>rip clips</h2>
           <InputField/>
         </div>
