@@ -16,7 +16,7 @@ class inputField extends Component {
   }
 
   submitHandle = (event) => {
-    alert('A name was submitted: ' + this.state.vidLink);
+    alert('A vid: ' + this.state.vidLink);
     event.preventDefault();
   }
 

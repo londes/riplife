@@ -18,7 +18,6 @@ class App extends Component {
         return response.json();
       })
       .then(responseJson => {
-        console.log(responseJson);
         this.setState({
           fetching: false,
           videos: responseJson,
@@ -31,6 +30,7 @@ class App extends Component {
   }
 
   renderVideos() {
+    debugger;
     if (!this.state.videos) {
       return (<div>loading vids</div>);
     }
