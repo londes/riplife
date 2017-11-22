@@ -9,12 +9,11 @@ class App extends Component {
     this.state = {
       fetching: true,
       videos: null,
-      //twitchvids: null,
     }
   }
 
   componentWillMount() {
-    fetch('http://localhost:8000/videos')
+    fetch('http://localhost:3001/api/videos')
       .then(response => {
         return response.json();
       })
@@ -29,30 +28,6 @@ class App extends Component {
          console.error(err);
          throw(err);
       });
-
-    // fetch('https://api.twitch.tv/kraken/clips/top?limit=10&game=Path%20Of%20Exile&trending=true', {
-    //   headers: {
-    //     'Client-ID': 'ousqrlk5qmygv0cm132y6mq7oehpx4',
-    //     'Accept': 'application/vnd.twitchtv.v5+json',
-    //   },
-    //   method: 'GET',
-    // })
-    //   .then(response => {
-    //     console.log(response);
-    //     debugger;
-    //     return response.json();
-    //   })
-    //   .then(responseJson => {
-    //     console.log(responseJson);
-    //     this.setState({
-    //       twitchvids: responseJson,
-    //     })
-    //     debugger;
-    //   })
-    //   .catch(err => {
-    //      console.error(err);
-    //      throw(err);
-    //   });
   }
 
   renderVideos() {
@@ -64,14 +39,12 @@ class App extends Component {
       <div>
         {this.state.videos.map((video) => (
           <div class="vidcontainer">
-            <h2>{video.name}</h2>
             <iframe src={video.url}
               width="640"
               height="360"
               frameborder="0"
               scrolling="no"
               allowfullscreen="false"></iframe>
-            <h3>{video.description}</h3>
           </div>
         ))}
       </div>

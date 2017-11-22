@@ -4,6 +4,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var Video = require('./model/videos');
 //and create our instances
 var app = express();
 var router = express.Router();
@@ -12,11 +13,11 @@ var router = express.Router();
 var port = process.env.API_PORT || 3001;
 var db_username = process.env.DB_USERNAME;
 var db_password = process.env.DB_PASSWORD;
-console.log(db_username);
-console.log(db_password);
 
 //db config
-mongoose.connect(`mongodb://${db_username}:${db_password}@ds115446.mlab.com:15446/londes_data`);
+mongoose.connect(`mongodb://${db_username}:${db_password}@ds115446.mlab.com:15446/londes_data`, {
+  useMongoClient: true,
+});
 
 //now we should configure the API to use bodyParser and look for
 //JSON data in the request body
@@ -38,11 +39,44 @@ app.use(function(req, res, next) {
 
 //now we can set the route path & initialize the API
 router.get('/', function(req, res) {
- res.json({ message: 'API Initialized!'});
+ res.json({ message: 'API Initialized'});
 });
-router.get('/test', function(req, res) {
- res.json({ message: 'stay safe'});
-});
+
+//adding the /videos route to our /api router
+router.route('/videos')
+  //retrieve all videos from db
+  .get(function(req,res) {
+    //looks at our Video Schema
+    Video.find(function(err, videos) {
+      if (err)
+      res.send(err);
+      //responds with a json object of our database videos.
+      res.json(videos)
+    });
+  })
+  //post new video to the Database
+  .post(function(req, res) {
+    console.log("....");
+    var video = new Video({
+      url: req.body.url,
+    });
+
+    video.save();
+
+    video.save(function(err) {
+      if (err) {
+        console.log("error");
+        return (err);
+      }
+
+      console.log('no error in post');
+
+      res.json({ message: 'video successfully added'});
+    });
+
+    console.log("eval");
+  })
+  ;
 
 //Use our router configuration when we call /api
 app.use('/api', router);
