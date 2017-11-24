@@ -15,6 +15,7 @@ class App extends Component {
   componentWillMount() {
     fetch('http://localhost:3001/api/videos')
       .then(response => {
+        debugger;
         return response.json();
       })
       .then(responseJson => {
@@ -30,7 +31,6 @@ class App extends Component {
   }
 
   renderVideos() {
-    debugger;
     if (!this.state.videos) {
       return (<div>loading vids</div>);
     }
