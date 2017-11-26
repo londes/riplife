@@ -15,7 +15,6 @@ class App extends Component {
   componentWillMount() {
     fetch('http://localhost:3001/api/videos')
       .then(response => {
-        debugger;
         return response.json();
       })
       .then(responseJson => {
@@ -37,7 +36,7 @@ class App extends Component {
 
     return (
       <div>
-        {this.state.videos.map((video) => (
+        {this.state.videos.reverse().map((video) => (
           <div class="vidcontainer">
             <iframe src={video.url}
               width="640"

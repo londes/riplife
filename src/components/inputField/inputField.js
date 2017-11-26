@@ -17,8 +17,21 @@ class inputField extends Component {
   }
 
   submitHandle = (event) => {
-    alert('A vid: ' + this.state.vidLink);
     event.preventDefault();
+    if (typeof this.state.vidLink === 'string' || this.state.vidLink instanceof String) {
+      let splitVidLink = this.state.vidLink.split('/');
+      if (splitVidLink[0] === "clips.twitch.tv" || splitVidLink[2] === "clips.twitch.tv") {
+        alert('thank ye for submitting a rippy clippy');
+      }
+      else{
+        alert(this.state.vidLink + 'is not a rippy clippy. please submit a rippy twitch clip.');
+      }
+    }
+    else{
+      alert(this.state.vidLink + 'is not a rippy clippy. please submit a rippy twitch clip.');
+    }
+
+    
   }
 
  render() {
