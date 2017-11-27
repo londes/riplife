@@ -31,14 +31,14 @@ class inputField extends Component {
       alert(this.state.vidLink + 'is not a rippy clippy. please submit a rippy twitch clip.');
     }
 
-    
+
   }
 
  render() {
   return (
     <form onSubmit={this.submitHandle}>
       <label>
-        sned noodz:
+        sned twitch clip:
         <input type="text" value={this.state.vidLink} onChange={this.changeHandler} />
       </label>
       <input type="submit" value="Submit" />
