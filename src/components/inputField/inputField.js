@@ -23,12 +23,15 @@ class inputField extends Component {
     if (typeof this.state.vidLink === 'string' || this.state.vidLink instanceof String) {
       let cleanVidLink = this.state.vidLink.trim();
       let splitVidLink = cleanVidLink.split('/');
-      if (splitVidLink[0] === "clips.twitch.tv" || splitVidLink[2] === "clips.twitch.tv") {
+      let clipsLocation = splitVidLink.indexOf("clips.twitch.tv");
+      if (!(clipsLocation === -1)) {
+        let clipId = splitVidLink[clipsLocation+1];
+        let embedUrl = `https://clips.twitch.tv/embed?clip=${clipId}&autoplay=false&tt_medium=clips_embed`;
         alert('thank ye for submitting a rippy clippy');
 
-        axios.post(this.props.url, {url: this.state.vidLink})
+        axios.post(this.props.url, {url: embedUrl})
           .then(res => {
-            this.setState({vidLink: res});
+            this.setState({vidLink: ""});
           })
           .catch(err => {
             console.error(err);

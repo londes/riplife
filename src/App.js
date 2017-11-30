@@ -37,7 +37,7 @@ class App extends Component {
     return (
       <div>
         {this.state.videos.reverse().map((video) => (
-          <div class="vidcontainer" id={video['_id']}>
+          <div class="vidcontainer">
             <iframe src={video.url}
               width="640"
               height="360"
