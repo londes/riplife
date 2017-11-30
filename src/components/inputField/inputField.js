@@ -18,10 +18,21 @@ class inputField extends Component {
 
   submitHandle = (event) => {
     event.preventDefault();
+    alert(event);
+
     if (typeof this.state.vidLink === 'string' || this.state.vidLink instanceof String) {
-      let splitVidLink = this.state.vidLink.split('/');
+      let cleanVidLink = this.state.vidLink.trim();
+      let splitVidLink = cleanVidLink.split('/');
       if (splitVidLink[0] === "clips.twitch.tv" || splitVidLink[2] === "clips.twitch.tv") {
         alert('thank ye for submitting a rippy clippy');
+
+        axios.post(this.props.url, {url: this.state.vidLink})
+          .then(res => {
+            this.setState({vidLink: res});
+          })
+          .catch(err => {
+            console.error(err);
+          });
       }
       else{
         alert(this.state.vidLink + 'is not a rippy clippy. please submit a rippy twitch clip.');
@@ -30,8 +41,6 @@ class inputField extends Component {
     else{
       alert(this.state.vidLink + 'is not a rippy clippy. please submit a rippy twitch clip.');
     }
-
-
   }
 
  render() {

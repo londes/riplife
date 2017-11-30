@@ -37,7 +37,7 @@ class App extends Component {
     return (
       <div>
         {this.state.videos.reverse().map((video) => (
-          <div class="vidcontainer">
+          <div class="vidcontainer" id={video['_id']}>
             <iframe src={video.url}
               width="640"
               height="360"
@@ -55,7 +55,10 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <h2>rip clips</h2>
-          <InputField/>
+          <InputField
+            url="http://localhost:3001/api/videos"
+            pollInterval={2000}
+          />
         </div>
         {this.renderVideos()}
       </div>

@@ -72,26 +72,15 @@ router.route('/videos')
   //post new video to the Database
   .post(function(req, res) {
     console.log("....");
-    var video = new Video({
-      url: req.body.url,
-    });
-
-    video.save();
+    var video = new Video();
+    video.url = req.body.url;
 
     video.save(function(err) {
-      if (err) {
-        console.log("error");
-        return (err);
-      }
-
-      console.log('no error in post');
-
-      res.json({ message: 'video successfully added'});
+      if (err)
+      res.send(err);
+      res.json({message: 'rippy clippy added'});
     });
-
-    console.log("eval");
-  })
-  ;
+  });
 
 //Use our router configuration when we call /api
 app.use('/api', router);
