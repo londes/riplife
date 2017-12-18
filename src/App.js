@@ -13,6 +13,13 @@ class App extends Component {
   }
 
   componentWillMount() {
+    this.fetchVideos();
+    setInterval(() => {
+      this.fetchVideos();
+    }, 3000);
+  }
+
+  fetchVideos () {
     fetch('http://localhost:3001/api/videos')
       .then(response => {
         return response.json();
@@ -53,11 +60,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
+        <div className="App-header" id="header">
           <h2>rip clips</h2>
           <InputField
             url="http://localhost:3001/api/videos"
-            pollInterval={2000}
           />
         </div>
         {this.renderVideos()}
