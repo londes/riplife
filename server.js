@@ -5,29 +5,22 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var Video = require('./model/videos');
-const Clarifai = require('clarifai');
+var twilio = require('twilio');
 //and create our instances
 var app = express();
 var router = express.Router();
-const clarApp = new Clarifai.App({
- apiKey: process.env.CLRF_APIKEY
-});
-console.log('clarapp:' + clarApp.apiKey);
-
-clarApp.models.predict(Clarifai.GENERAL_MODEL, 'https://samples.clarifai.com/metro-north.jpg').then(
-  function(response) {
-    console.log('response: ' + response);
-  },
-  function(err) {
-    console.error('error: ' + err);
-  }
-);
 
 //set our port to either a predetermined port number if you have set
 //it up, or 3001
 var port = process.env.API_PORT || 3001;
 var db_username = process.env.DB_USERNAME;
 var db_password = process.env.DB_PASSWORD;
+
+//set up twilio client
+var twil_id = process.env.TWIL_SID;
+var twil_authtoken = process.env.TWIL_TOKEN;
+var twilioClient = new twilio(twil_id, twil_authtoken);
+
 
 //db config
 mongoose.connect(`mongodb://${db_username}:${db_password}@ds115446.mlab.com:15446/londes_data`, {
