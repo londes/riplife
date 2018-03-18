@@ -2,6 +2,7 @@
 'use-strict';
 //first we import our dependencies…
 var express = require('express');
+var msgListener = require('http');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var Video = require('./model/videos');
@@ -19,7 +20,7 @@ var db_password = process.env.DB_PASSWORD;
 //set up twilio client
 var twil_id = process.env.TWIL_SID;
 var twil_authtoken = process.env.TWIL_TOKEN;
-var twilioClient = new twilio(twil_id, twil_authtoken);
+const twilioClient = require('twilio')(twil_id, twil_authtoken);
 
 
 //db config
@@ -67,6 +68,15 @@ router.route('/videos')
     console.log("....");
     var video = new Video();
     video.url = req.body.url;
+
+    //add twilio code
+     // new collection in mongo
+     // mongodb has check to see if a property is unique OR "verified" boolean value
+    twilioClient.messages.create({
+      to: '+19784600023',
+      from: '+16179968568',
+      body: 'you just received a rippy clippy waguan' + video.url + '';
+    }).then(message => console.log(message.sid));
 
     video.save(function(err) {
       if (err)
