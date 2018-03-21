@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import axios from 'axios';
 import './InputField.css';
 
 class inputField extends Component {
@@ -7,6 +6,7 @@ class inputField extends Component {
     super (props);
     this.state = {
       vidLink: '',
+      clipUrl: '',
     };
   };
   static propTypes = {
@@ -29,7 +29,14 @@ class inputField extends Component {
         let embedUrl = `https://clips.twitch.tv/embed?clip=${clipId}&autoplay=false&tt_medium=clips_embed`;
         alert('thank ye for submitting a rippy clippy');
 
-        axios.post(this.props.url, {url: embedUrl})
+        //can remove axios and perform fetch using fetch()
+        fetch(this.props.url, {
+          body: {
+            embedUrl: embedUrl,
+            clipUrl: cleanVidLink
+          },
+          method: 'POST'
+        })
           .then(res => {
             this.setState({vidLink: ""});
           })

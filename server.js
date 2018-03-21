@@ -65,9 +65,18 @@ router.route('/videos')
   })
   //post new video to the Database
   .post(function(req, res) {
-    console.log("....");
-    var video = new Video();
-    video.url = req.body.url;
+    console.dir(req);
+    const {
+      embedUrl,
+      clipUrl,
+    } = req.body;
+    var video = new Video({
+      embedUrl: embedUrl,
+      clipUrl: clipUrl
+    });
+
+    console.log("video clip url: " + clipUrl);
+    console.dir(video);
 
     //add twilio code
      // new collection in mongo
@@ -75,7 +84,7 @@ router.route('/videos')
     twilioClient.messages.create({
       to: '+19784600023',
       from: '+16179968568',
-      body: 'you just received a rippy clippy waguan' + video.url + '';
+      body: 'you just received a rippy clippy ' + clipUrl + '. Reply RIP to verify this video, or FAKE to ignore.'
     }).then(message => console.log(message.sid));
 
     video.save(function(err) {
