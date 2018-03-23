@@ -31,11 +31,12 @@ class inputField extends Component {
 
         //can remove axios and perform fetch using fetch()
         fetch(this.props.url, {
-          body: {
-            embedUrl: embedUrl,
-            clipUrl: cleanVidLink
-          },
-          method: 'POST'
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({
+            'embedUrl': embedUrl,
+            'clipUrl': cleanVidLink
+          })
         })
           .then(res => {
             this.setState({vidLink: ""});

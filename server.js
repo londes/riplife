@@ -24,6 +24,7 @@ const twilioClient = require('twilio')(twil_id, twil_authtoken);
 
 
 //db config
+mongoose.Promise = require('bluebird');
 mongoose.connect(`mongodb://${db_username}:${db_password}@ds115446.mlab.com:15446/londes_data`, {
   useMongoClient: true,
 });
@@ -65,7 +66,7 @@ router.route('/videos')
   })
   //post new video to the Database
   .post(function(req, res) {
-    console.dir(req);
+    console.dir(req.body);
     const {
       embedUrl,
       clipUrl,
@@ -74,9 +75,6 @@ router.route('/videos')
       embedUrl: embedUrl,
       clipUrl: clipUrl
     });
-
-    console.log("video clip url: " + clipUrl);
-    console.dir(video);
 
     //add twilio code
      // new collection in mongo
