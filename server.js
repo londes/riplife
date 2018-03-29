@@ -84,13 +84,19 @@ router.route('/videos')
       from: '+16179968568',
       body: 'you just received a rippy clippy ' + clipUrl + '. Reply RIP to verify this video, or FAKE to ignore.'
     }).then(message => console.log(message.sid));
-
-    video.save(function(err) {
-      if (err)
-      res.send(err);
-      res.json({message: 'rippy clippy added'});
-    });
   });
+
+  // hanging onto this video.save function
+  // video.save(function(err) {
+  //   if (err)
+  //   res.send(err);
+  //   res.json({message: 'rippy clippy added'});
+  // });
+
+  router.route('/messages')
+    .post(function(req,res) {
+      console.dir(req.body.Body);
+    });
 
 //Use our router configuration when we call /api
 app.use('/api', router);
