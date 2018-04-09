@@ -30,7 +30,7 @@ mongoose.connect(`mongodb://${db_username}:${db_password}@ds115446.mlab.com:1544
   useMongoClient: true,
 });
 
-//now we should configure the API to use bodyParser and look for
+//configure the API to use bodyParser and look for
 //JSON data in the request body
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -84,9 +84,6 @@ router.route('/videos')
       rip: false
     });
 
-    //add twilio code
-     // new collection in mongo
-     // mongodb has check to see if a property is unique OR "verified" boolean value
     twilioClient.messages.create({
       to: '+19784600023',
       from: '+16179968568',
@@ -108,18 +105,24 @@ router.route('/videos')
       var ripOrFake = messagesStrings[0].toLowerCase();
       if ((ripOrFake === 'rip' || ripOrFake === 'fake') && (messagesStrings.length > 1)){
         var vidId = messagesStrings[1];
-        console.log("r or f: " + ripOrFake + ", vid id: " + vidId);
+        console.log("rip or fake: " + ripOrFake + ", vid id: " + vidId);
 
-        if (ripOrFake === 'rip'){
-
-        }
-        else if (ripOrFake === 'fake') {
-
-        }
+        Video.findOne({clipId: vidId}, function(err, video){
+          if (ripOrFake === 'rip'){
+              video.set({
+                checked: true,
+                rip: true
+              });
+            }
+          else if (ripOrFake === 'fake') {
+              video.set({
+                checked: true,
+                rip: false
+              });
+          }
+          console.log('updated video... ' + video);
+        });
       }
-      // check for RIP vs. FALSE, and parse ID
-      // if RIP, toggle true for that ID
-      // if FALSE, do nothing for that ID
     });
 
 //Use our router configuration when we call /api
