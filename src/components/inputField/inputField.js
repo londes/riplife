@@ -7,6 +7,7 @@ class inputField extends Component {
     this.state = {
       vidLink: '',
       clipUrl: '',
+      clipId: '',
     };
   };
   static propTypes = {
@@ -28,14 +29,14 @@ class inputField extends Component {
         let clipId = splitVidLink[clipsLocation+1];
         let embedUrl = `https://clips.twitch.tv/embed?clip=${clipId}&autoplay=false&tt_medium=clips_embed`;
         alert('thank ye for submitting a rippy clippy');
-
         //can remove axios and perform fetch using fetch()
         fetch(this.props.url, {
           method: 'POST',
           headers: {'Content-Type':'application/json'},
           body: JSON.stringify({
             'embedUrl': embedUrl,
-            'clipUrl': cleanVidLink
+            'clipUrl': cleanVidLink,
+            'clipId': clipId,
           })
         })
           .then(res => {

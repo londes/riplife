@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var Video = require('./model/videos');
 var twilio = require('twilio');
+var md5 = require('md5');
 //and create our instances
 var app = express();
 var router = express.Router();
@@ -55,6 +56,8 @@ router.get('/', function(req, res) {
 //adding the /videos route to our /api router
 router.route('/videos')
   //retrieve all videos from db
+
+  // 2018-03-29 -- this is where we may be able to filter the get request by checking for verified
   .get(function(req,res) {
     //looks at our Video Schema
     Video.find(function(err, videos) {
@@ -67,13 +70,18 @@ router.route('/videos')
   //post new video to the Database
   .post(function(req, res) {
     console.dir(req.body);
-    const {
+    var {
       embedUrl,
       clipUrl,
+      clipId
     } = req.body;
+    var clipId = md5(clipId).substring(0,4);
     var video = new Video({
       embedUrl: embedUrl,
-      clipUrl: clipUrl
+      clipUrl: clipUrl,
+      clipId: clipId,
+      checked: false,
+      rip: false
     });
 
     //add twilio code
@@ -82,20 +90,36 @@ router.route('/videos')
     twilioClient.messages.create({
       to: '+19784600023',
       from: '+16179968568',
-      body: 'you just received a rippy clippy ' + clipUrl + '. Reply RIP to verify this video, or FAKE to ignore.'
+      body: 'you just received a rippy clippy ' + clipUrl + '. Reply RIP '+ clipId +' to verify this video, or FAKE '+ clipId +' to ignore.'
     }).then(message => console.log(message.sid));
-  });
 
-  // hanging onto this video.save function
-  // video.save(function(err) {
-  //   if (err)
-  //   res.send(err);
-  //   res.json({message: 'rippy clippy added'});
-  // });
+    video.save(function(err) {
+      if (err)
+      res.send(err);
+      res.json({message: 'rippy clippy added'});
+    });
+  });
 
   router.route('/messages')
     .post(function(req,res) {
-      console.dir(req.body.Body);
+      var message = req.body.Body;
+      console.log(message);
+      var messagesStrings = message.split(' ');
+      var ripOrFake = messagesStrings[0].toLowerCase();
+      if ((ripOrFake === 'rip' || ripOrFake === 'fake') && (messagesStrings.length > 1)){
+        var vidId = messagesStrings[1];
+        console.log("r or f: " + ripOrFake + ", vid id: " + vidId);
+
+        if (ripOrFake === 'rip'){
+
+        }
+        else if (ripOrFake === 'fake') {
+
+        }
+      }
+      // check for RIP vs. FALSE, and parse ID
+      // if RIP, toggle true for that ID
+      // if FALSE, do nothing for that ID
     });
 
 //Use our router configuration when we call /api

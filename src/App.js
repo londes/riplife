@@ -25,6 +25,7 @@ class App extends Component {
         return response.json();
       })
       .then(responseJson => {
+        console.log(responseJson);
         this.setState({
           fetching: false,
           videos: responseJson,
@@ -36,10 +37,16 @@ class App extends Component {
       });
   }
 
+  buildVerifiedVideos() {
+    //takes this.state.videos and checks for verified: true videos and pushes them to a new array
+  }
+
   renderVideos() {
     if (!this.state.videos) {
       return (<div>loading vids</div>);
     }
+
+    //buildVerifiedVideos();
 
     return (
       <div>

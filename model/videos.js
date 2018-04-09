@@ -7,7 +7,10 @@ var Schema = mongoose.Schema;
 //object that shows the shape of your database entries.
 var VideosSchema = new Schema({
  embedUrl: String,
- clipUrl: String
+ clipUrl: String,
+ clipId: String,
+ checked: Boolean,
+ rip: Boolean
 });
 //export our module to use in server.js
 module.exports = mongoose.model('Video', VideosSchema);
