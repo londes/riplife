@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   fetchVideos () {
-    fetch('http://localhost:3001/api/videos')
+    fetch('http://localhost:3001/api/last5rips')
       .then(response => {
         return response.json();
       })
@@ -37,20 +37,15 @@ class App extends Component {
       });
   }
 
-  buildVerifiedVideos() {
-    //takes this.state.videos and checks for verified: true videos and pushes them to a new array
-  }
 
   renderVideos() {
     if (!this.state.videos) {
       return (<div>loading vids</div>);
     }
 
-    //buildVerifiedVideos();
-
     return (
       <div>
-        {this.state.videos.reverse().slice(0,5).map((video) => (
+        {this.state.videos.map((video) => (
           <div className="vidcontainer">
             <iframe src={video.embedUrl}
               width="640"

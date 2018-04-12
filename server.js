@@ -91,8 +91,9 @@ router.route('/videos')
     }).then(message => console.log(message.sid));
 
     video.save(function(err) {
-      if (err)
-      res.send(err);
+      if (err) {
+        res.send(err);
+      }
       res.json({message: 'rippy clippy added'});
     });
   });
@@ -106,7 +107,6 @@ router.route('/videos')
       if ((ripOrFake === 'rip' || ripOrFake === 'fake') && (messagesStrings.length > 1)){
         var vidId = messagesStrings[1];
         console.log("rip or fake: " + ripOrFake + ", vid id: " + vidId);
-
         Video.findOne({clipId: vidId}, function(err, video){
           if (ripOrFake === 'rip'){
               video.set({
@@ -120,11 +120,32 @@ router.route('/videos')
                 rip: false
               });
           }
-          console.log('updated video... ' + video);
+          video.save(function(err) {
+            if (err) {
+              res.send(err);
+            }
+            res.json(video);
+          });
+          console.log('updated video: ' + video);
         });
       }
-    });
+    })
 
+    router.route('/last5rips')
+      .get(function(req,res) {
+        Video.
+          find({
+            rip: true
+          }).
+          limit(5).
+          sort("date").
+          exec(function(err, videos) {
+            if (err)
+            res.send(err);
+            //responds with a json object of our database videos.
+            res.json(videos)
+          });
+      })
 //Use our router configuration when we call /api
 app.use('/api', router);
 
