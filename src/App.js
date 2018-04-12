@@ -16,7 +16,7 @@ class App extends Component {
     this.fetchVideos();
     setInterval(() => {
       this.fetchVideos();
-    }, 3000);
+    }, 5000);
   }
 
   fetchVideos () {

@@ -113,19 +113,20 @@ router.route('/videos')
                 checked: true,
                 rip: true
               });
+              video.save(function(err) {
+                if (err) {
+                  res.send(err);
+                }
+                res.json(video);
+              });
             }
           else if (ripOrFake === 'fake') {
               video.set({
                 checked: true,
                 rip: false
               });
+              video.remove();
           }
-          video.save(function(err) {
-            if (err) {
-              res.send(err);
-            }
-            res.json(video);
-          });
           console.log('updated video: ' + video);
         });
       }
@@ -138,7 +139,7 @@ router.route('/videos')
             rip: true
           }).
           limit(5).
-          sort("date").
+          sort([['_id', -1]]).
           exec(function(err, videos) {
             if (err)
             res.send(err);

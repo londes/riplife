@@ -1,8 +1,11 @@
 // creates canvas element, size of the window object.
+var windowSizer=document.getElementsByTagName('body')[0];
+console.dir(windowSizer);
 var monkaCanvas=document.createElement("canvas");
 monkaCanvas.id="monka-canvas";
-monkaCanvas.height=window.innerHeight;
-monkaCanvas.width=window.innerWidth;
+monkaCanvas.height=windowSizer.clientHeight;
+monkaCanvas.width=windowSizer.clientWidth;
+console.log('canvas height: ' +monkaCanvas.height+ ' canvas width: ' +monkaCanvas.width);
 var ctx = monkaCanvas.getContext("2d");
 document.body.appendChild(monkaCanvas);
 
