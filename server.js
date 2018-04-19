@@ -8,19 +8,24 @@ var bodyParser = require('body-parser');
 var Video = require('./model/videos');
 var twilio = require('twilio');
 var md5 = require('md5');
+var fs = require('fs');
 //and create our instances
 var app = express();
 var router = express.Router();
 
+// parse our local-settings.json to pull in appropriate credentials
+var localSettingsContents = fs.readFileSync("local-settings.json");
+var localSettingsJson = JSON.parse(localSettingsContents);
+
 //set our port to either a predetermined port number if you have set
 //it up, or 3001
-var port = process.env.API_PORT || 3001;
-var db_username = process.env.DB_USERNAME;
-var db_password = process.env.DB_PASSWORD;
+var port = localSettingsJson.PORT || 3001;
+var db_username = localSettingsJson.DB_USERNAME;
+var db_password = localSettingsJson.DB_PASSWORD;
 
 //set up twilio client
-var twil_id = process.env.TWIL_SID;
-var twil_authtoken = process.env.TWIL_TOKEN;
+var twil_id = localSettingsJson.TWIL_SID;
+var twil_authtoken = localSettingsJson.TWIL_AUTHTOKEN;
 const twilioClient = require('twilio')(twil_id, twil_authtoken);
 
 
