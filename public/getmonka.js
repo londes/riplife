@@ -1,9 +1,10 @@
 // creates canvas element, size of the window object.
+debugger;
 var windowSizer=document.getElementsByTagName('body')[0];
 console.dir(windowSizer);
 var monkaCanvas=document.createElement("canvas");
 monkaCanvas.id="monka-canvas";
-monkaCanvas.height=windowSizer.clientHeight;
+monkaCanvas.height=document.querySelector('html').offsetHeight;
 monkaCanvas.width=windowSizer.clientWidth;
 console.log('canvas height: ' +monkaCanvas.height+ ' canvas width: ' +monkaCanvas.width);
 var ctx = monkaCanvas.getContext("2d");
@@ -18,6 +19,7 @@ function monkaDrawer(ctx,amountOfMonkaS) {
   for (i=0; i<amountOfMonkaS; i++) {
     var monkaS=document.createElement("img");
     monkaS.id="monka-" + whichMonka + "";
+    monkaS.classList.add('monkaS-head');
     monkaS.alt="shheeeeeeee";
     monkaS.src="/img/TrymOlU.jpg";
 

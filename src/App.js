@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import InputField from './components/InputField/InputField';
+import MonkasContainer from './components/MonkasContainer/MonkasContainer';
 import './App.css';
 
 class App extends Component {
@@ -46,7 +47,7 @@ class App extends Component {
     return (
       <div>
         {this.state.videos.map((video) => (
-          <div className="vidcontainer">
+          <div className="vid-container">
             <iframe src={video.embedUrl}
               width="640"
               height="360"
@@ -62,6 +63,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <MonkasContainer
+          containerWidth={300}
+          containerHeight={300}/>
         <div className="App-header" id="header">
           <h2>rip clips</h2>
           <InputField

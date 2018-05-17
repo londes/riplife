@@ -17,8 +17,7 @@ var router = express.Router();
 var localSettingsContents = fs.readFileSync("local-settings.json");
 var localSettingsJson = JSON.parse(localSettingsContents);
 
-//set our port to either a predetermined port number if you have set
-//it up, or 3001
+// set up server port and db creds
 var port = localSettingsJson.PORT || 3001;
 var db_username = localSettingsJson.DB_USERNAME;
 var db_password = localSettingsJson.DB_PASSWORD;
