@@ -12,11 +12,12 @@ class MonkasHead extends Component {
 
   render () {
     return (
-      <div
+      <img
         style={{height: this.props.height,
           width: this.props.width,
           left: this.props.x,
-          top: this.props.y}}
+          top: this.props.y,}}
+        src="/img/monkaS.png"
         className="monkaS-head"
         id={this.props.id} />
     )
