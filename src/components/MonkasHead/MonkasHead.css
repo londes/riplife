@@ -1,4 +1,6 @@
 .monkaS-head {
   position: absolute;
-  background-image: "../../img/monkaS.png";
+  background-image: url("/img/monkaS.png");
+  border-style: solid;
+  border-color: green;
 }

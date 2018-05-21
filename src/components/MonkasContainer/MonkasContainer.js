@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import MonkasHead from '../MonkasHead/MonkasHead';
 import './MonkasContainer.css';
 
-export default class MonkasContainer extends Component {
+class MonkasContainer extends Component {
   static propTypes = {
     containerHeight: PropTypes.number,
     containerWidth: PropTypes.number,
@@ -25,37 +25,43 @@ export default class MonkasContainer extends Component {
 
   render () {
 
+    let containerStyle = {
+
+    }
+
     const monkasItems = [
       {
         id: "1",
         width: 30,
         height: 30,
-        x: 20,
-        y: 60,
+        x: 40,
+        y: 90,
       },
       {
         id: "2",
-        width: 30,
-        height: 30,
-        x: 20,
-        y: 60,
+        width: 70,
+        height: 70,
+        x: 100,
+        y: 120,
       },
       {
         id: "3",
-        width: 30,
-        height: 30,
-        x: 20,
-        y: 60,
+        width: 90,
+        height: 90,
+        x: 200,
+        y: 200,
       }
     ];
 
     return (
       <div
-        width={this.props.containerWidth}
-        height={this.props.containerHeight}
-        className="monkas-container">
+        style={{height: this.props.containerWidth,
+          width: this.props.containerHeight}}
+        className="monkaS-container">
         {this.renderMonkasItems(monkasItems)}
       </div>
     )
   }
 }
+
+export default MonkasContainer;

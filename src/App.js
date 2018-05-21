@@ -63,9 +63,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <MonkasContainer
-          containerWidth={300}
-          containerHeight={300}/>
+      <MonkasContainer
+        containerWidth={300}
+        containerHeight={300} />
         <div className="App-header" id="header">
           <h2>rip clips</h2>
           <InputField

@@ -1,3 +1,4 @@
-.monkas-container {
+.monkaS-container {
   position: relative;
+  border: 6px solid red;
 }
