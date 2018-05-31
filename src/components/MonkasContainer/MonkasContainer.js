@@ -6,12 +6,13 @@ class MonkasContainer extends Component {
   static propTypes = {
     containerHeight: PropTypes.number,
     containerWidth: PropTypes.number,
+    howMany: PropTypes.number
   }
 
-  renderMonkasItems (monkasItems) {
+  renderMonkasItems (arr) {
     return (
       <div>
-      {monkasItems.map((monka) => (
+      {arr.map((monka) => (
         <MonkasHead
           id={monka.id}
           width={monka.width}
@@ -24,10 +25,17 @@ class MonkasContainer extends Component {
   }
 
   render () {
-
-    let containerStyle = {
-
-    }
+    // let containerStyle = {};
+    // let monkasItems = new Array(this.props.howMany);
+    // monkasItems = monkasItems.forEach((monka, index) => {
+    //   {
+    //     id: index.toString(),
+    //     width: Math.random() * (100- 20) + 20,
+    //     height: Math.random() * (100- 20) + 20,
+    //     x: Math.random() * (400- 10) + 10,
+    //     y: Math.random() * (400- 10) + 10
+    //   }
+    // });
 
     const monkasItems = [
       {
@@ -55,8 +63,7 @@ class MonkasContainer extends Component {
 
     return (
       <div
-        style={{height: this.props.containerWidth,
-          width: this.props.containerHeight}}
+        style={{flex: 1}}
         className="monkaS-container">
         {this.renderMonkasItems(monkasItems)}
       </div>
