@@ -8,8 +8,24 @@ class ImgFillerContainer extends Component {
     containerWidth: PropTypes.number,
     howMany: PropTypes.number
   }
+  constructor(props) {
+    super(props);
+    const imageList = [];
+    for (let i = 0; i<this.props.howMany; i++) {
+      imageList.push({
+        id: i.toString(),
+        width: Math.random() * (100- 20) + 20,
+        height: Math.random() * (100- 20) + 20,
+        x: Math.random() * (600- 10) + 10,
+        y: Math.random() * (600- 10) + 10
+      })
+    }
+    this.state = {
+      imageList: imageList,
+    }
+  }
 
-  renderChildImages (arr, childItem) {
+  renderChildImages (arr) {
     return (
       <div>
       {arr.map((monka) => (
@@ -26,47 +42,12 @@ class ImgFillerContainer extends Component {
   }
 
   render () {
-    // let containerStyle = {};
-    // let monkasItems = new Array(this.props.howMany);
-    // monkasItems = monkasItems.forEach((monka, index) => {
-    //   {
-    //     id: index.toString(),
-    //     width: Math.random() * (100- 20) + 20,
-    //     height: Math.random() * (100- 20) + 20,
-    //     x: Math.random() * (400- 10) + 10,
-    //     y: Math.random() * (400- 10) + 10
-    //   }
-    // });
-
-    const monkasItems = [
-      {
-        id: "1",
-        width: 30,
-        height: 30,
-        x: 40,
-        y: 90,
-      },
-      {
-        id: "2",
-        width: 70,
-        height: 70,
-        x: 100,
-        y: 120,
-      },
-      {
-        id: "3",
-        width: 90,
-        height: 90,
-        x: 200,
-        y: 200,
-      }
-    ];
 
     return (
       <div
         style={{flex: 1}}
         className="monkaS-container">
-        {this.renderChildImages(monkasItems)}
+        {this.renderChildImages(this.state.imageList)}
       </div>
     )
   }

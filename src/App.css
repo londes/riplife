@@ -29,4 +29,9 @@
 }
 
 .vid-container {
+  border: 6px solid yellow;
+}
+
+.content-wrapper {
+  position: relative;
 }

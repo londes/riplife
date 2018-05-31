@@ -45,9 +45,9 @@ class App extends Component {
     }
 
     return (
-      <div>
+      <div className="vid-container">
         {this.state.videos.map((video) => (
-          <div className="vid-container">
+          <div className="vid-wrapper">
             <iframe src={video.embedUrl}
               width="640"
               height="360"
@@ -69,11 +69,13 @@ class App extends Component {
             url="http://localhost:3001/api/videos"
           />
         </div>
-        <ImgFillerContainer
-          containerWidth={document.body.scrollWidth}
-          containerHeight={document.body.scrollHeight}
-          howMany={200}/>
-        {this.renderVideos()}
+        <div className="content-wrapper">
+          <ImgFillerContainer
+            containerWidth={document.body.scrollWidth}
+            containerHeight={document.body.scrollHeight}
+            howMany={200}/>
+          {this.renderVideos()}
+        </div>
       </div>
     );
   }
