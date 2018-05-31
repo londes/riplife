@@ -1,24 +1,25 @@
 import React, { Component, PropTypes } from 'react';
-import MonkasHead from '../MonkasHead/MonkasHead';
-import './MonkasContainer.css';
+import ImgFiller from '../ImgFiller/ImgFiller';
+import './ImgFillerContainer.css';
 
-class MonkasContainer extends Component {
+class ImgFillerContainer extends Component {
   static propTypes = {
     containerHeight: PropTypes.number,
     containerWidth: PropTypes.number,
     howMany: PropTypes.number
   }
 
-  renderMonkasItems (arr) {
+  renderChildImages (arr, childItem) {
     return (
       <div>
       {arr.map((monka) => (
-        <MonkasHead
+        <ImgFiller
           id={monka.id}
           width={monka.width}
           height={monka.height}
           x={monka.x}
-          y={monka.y} />
+          y={monka.y}
+          src="/img/monkaS.png" />
       ))}
       </div>
     )
@@ -65,10 +66,10 @@ class MonkasContainer extends Component {
       <div
         style={{flex: 1}}
         className="monkaS-container">
-        {this.renderMonkasItems(monkasItems)}
+        {this.renderChildImages(monkasItems)}
       </div>
     )
   }
 }
 
-export default MonkasContainer;
+export default ImgFillerContainer;

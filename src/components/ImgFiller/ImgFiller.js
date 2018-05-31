@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import './MonkasHead.css';
+import './ImgFiller.css';
 
-class MonkasHead extends Component {
+class ImgFiller extends Component {
   static propTypes = {
     id: PropTypes.string,
     height: PropTypes.number,
     width: PropTypes.number,
     x: PropTypes.number,
     y: PropTypes.number,
+    src: PropTypes.string
   }
 
   render () {
@@ -17,11 +18,11 @@ class MonkasHead extends Component {
           width: this.props.width,
           left: this.props.x,
           top: this.props.y,}}
-        src="/img/monkaS.png"
+        src={this.props.src}
         className="monkaS-head"
         id={this.props.id} />
     )
   }
 }
 
-export default MonkasHead;
+export default ImgFiller;

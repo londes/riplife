@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import InputField from './components/InputField/InputField';
-import MonkasContainer from './components/MonkasContainer/MonkasContainer';
+import ImgFillerContainer from './components/ImgFillerContainer/ImgFillerContainer';
 import './App.css';
 
 class App extends Component {
@@ -69,7 +69,7 @@ class App extends Component {
             url="http://localhost:3001/api/videos"
           />
         </div>
-        <MonkasContainer
+        <ImgFillerContainer
           containerWidth={document.body.scrollWidth}
           containerHeight={document.body.scrollHeight}
           howMany={200}/>
