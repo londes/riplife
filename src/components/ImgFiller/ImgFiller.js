@@ -18,9 +18,9 @@ class ImgFiller extends Component {
           width: this.props.width,
           left: this.props.x,
           top: this.props.y,}}
-        src={this.props.src}
-        className="monkaS-head"
-        id={this.props.id} />
+          src={this.props.src}
+          className="image-item"
+          id={this.props.id} />
     )
   }
 }

@@ -4,25 +4,35 @@ import './ImgFillerContainer.css';
 
 class ImgFillerContainer extends Component {
   static propTypes = {
+    containerId: PropTypes.string,
     containerHeight: PropTypes.number,
     containerWidth: PropTypes.number,
-    howMany: PropTypes.number
+    howMany: PropTypes.number,
+    imgSrc: PropTypes.string
   }
   constructor(props) {
     super(props);
     const imageList = [];
+    this.state = {
+      imageList: imageList,
+      newContainerHeight: 10
+    }
     for (let i = 0; i<this.props.howMany; i++) {
       imageList.push({
         id: i.toString(),
-        width: Math.random() * (100- 20) + 20,
-        height: Math.random() * (100- 20) + 20,
-        x: Math.random() * (600- 10) + 10,
-        y: Math.random() * (600- 10) + 10
+        width: Math.random() * (120 - 20) + 20,
+        height: Math.random() * (120 - 20) + 20,
+        x: Math.random() * (this.props.containerWidth - 60),
+        y: Math.random() * (1832 - 60)
       })
     }
-    this.state = {
-      imageList: imageList,
-    }
+  }
+
+  componentDidMount() {
+    let height = document.getElementById(`${this.props.containerId}`).clientHeight;
+    this.setState({
+      newContainerHeight: height,
+    })
   }
 
   renderChildImages (arr) {
@@ -35,7 +45,7 @@ class ImgFillerContainer extends Component {
           height={monka.height}
           x={monka.x}
           y={monka.y}
-          src="/img/monkaS.png" />
+          src={this.props.imgSrc} />
       ))}
       </div>
     )
@@ -45,6 +55,7 @@ class ImgFillerContainer extends Component {
 
     return (
       <div
+        id={this.props.containerId}
         style={{flex: 1}}
         className="monkaS-container">
         {this.renderChildImages(this.state.imageList)}

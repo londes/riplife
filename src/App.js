@@ -69,11 +69,14 @@ class App extends Component {
             url="http://localhost:3001/api/videos"
           />
         </div>
-        <div className="content-wrapper">
+        <div
+          className="content-wrapper">
           <ImgFillerContainer
+            containerId="monkaS-head-container"
             containerWidth={document.body.scrollWidth}
             containerHeight={document.body.scrollHeight}
-            howMany={200}/>
+            howMany={2000}
+            imgSrc={"/img/monkaS.png"}/>
           {this.renderVideos()}
         </div>
       </div>
