@@ -19,7 +19,6 @@ class InputField extends Component {
 
   submitHandle = (event) => {
     event.preventDefault();
-    alert(event);
 
     if (typeof this.state.vidLink === 'string' || this.state.vidLink instanceof String) {
       let cleanVidLink = this.state.vidLink.trim();
@@ -68,4 +67,4 @@ class InputField extends Component {
  };
 }
 
-export default inputField;
+export default InputField;
