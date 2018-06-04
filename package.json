@@ -16,7 +16,6 @@
     "twilio": "^3.15.0"
   },
   "devDependencies": {
-    "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "nodemon": "^1.17.3",
     "react-scripts": "0.9.5"
   },
