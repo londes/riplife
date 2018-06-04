@@ -1,5 +1,4 @@
 // creates canvas element, size of the window object.
-debugger;
 var windowSizer=document.getElementsByTagName('body')[0];
 console.dir(windowSizer);
 var monkaCanvas=document.createElement("canvas");
