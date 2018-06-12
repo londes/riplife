@@ -21,7 +21,7 @@ class App extends Component {
   }
 
   fetchVideos () {
-    fetch('http://rippy-app.herokuapp.com/api/last5rips')
+    fetch('https://rippy-app.herokuapp.com/api/last5rips')
       .then(response => {
         return response.json();
       })
@@ -66,7 +66,7 @@ class App extends Component {
         <div className="App-header" id="header">
           <h2>rip clips</h2>
           <InputField
-            url="http://localhost:3001/api/videos"
+            url="https://rippy-app.herokuapp.com/api/videos"
           />
         </div>
         <div
