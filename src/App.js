@@ -21,7 +21,7 @@ class App extends Component {
   }
 
   fetchVideos () {
-    fetch('http://localhost:3001/api/last5rips')
+    fetch('http://rippy-app.herokuapp.com/api/last5rips')
       .then(response => {
         return response.json();
       })
