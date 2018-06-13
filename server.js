@@ -14,7 +14,8 @@ var app = express();
 var router = express.Router();
 
 // parse our local-settings.json to pull in appropriate credentials
-var localSettingsContents = fs.readFileSync("local-settings.json");
+// var localSettingsContents = fs.readFileSync("local-settings.json");
+var localSettingsContents = process.env;
 var localSettingsJson = JSON.parse(localSettingsContents);
 
 // set up server port and db creds
@@ -138,6 +139,7 @@ router.route('/videos')
 
     router.route('/last5rips')
       .get(function(req,res) {
+        console.log(process.env.DB_USERNAME);
         console.log('fkn reeep');
         res.json({
           status: "alive"
