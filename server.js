@@ -138,18 +138,22 @@ router.route('/videos')
 
     router.route('/last5rips')
       .get(function(req,res) {
-        Video.
-          find({
-            rip: true
-          }).
-          limit(5).
-          sort([['_id', -1]]).
-          exec(function(err, videos) {
-            if (err)
-            res.send(err);
-            //responds with a json object of our database videos.
-            res.json(videos)
-          });
+        console.log('fkn reeep');
+        res.json({
+          status: "alive"
+        });
+        // Video.
+        //   find({
+        //     rip: true
+        //   }).
+        //   limit(5).
+        //   sort([['_id', -1]]).
+        //   exec(function(err, videos) {
+        //     if (err)
+        //     res.send(err);
+        //     //responds with a json object of our database videos.
+        //     res.json(videos)
+        //   });
       })
 //Use our router configuration when we call /api
 app.use('/api', router);
