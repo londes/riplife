@@ -54,7 +54,8 @@ app.use(function(req, res, next) {
 
 //now we can set the route path & initialize the API
 router.get('/', function(req, res) {
- res.json({ message: 'API Initialized'});
+ //res.json({ message: 'API Initialized'}); // send index.html
+ res.sendFile('./build/index.html');
 });
 
 //adding the /videos route to our /api router
