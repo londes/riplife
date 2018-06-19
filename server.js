@@ -142,26 +142,21 @@ router.route('/videos')
 
     router.route('/last5rips')
       .get(function(req,res) {
-        console.log(process.env.DB_USERNAME);
-        console.log('fkn reeep');
-        res.json({
-          status: "alive"
-        });
-        // Video.
-        //   find({
-        //     rip: true
-        //   }).
-        //   limit(5).
-        //   sort([['_id', -1]]).
-        //   exec(function(err, videos) {
-        //     if (err)
-        //     res.send(err);
-        //     //responds with a json object of our database videos.
-        //     res.json(videos)
-        //   });
+        Video.
+          find({
+            rip: true
+          }).
+          limit(5).
+          sort([['_id', -1]]).
+          exec(function(err, videos) {
+            if (err)
+            res.send(err);
+            //responds with a json object of our database videos.
+            res.json(videos)
+          });
       })
-//Use our router configuration when we call /api
-app.use('/api', router);
+//Use our router configuration when we call /
+app.use('/', router);
 
 //starts the server and listens for requests
 app.listen(port, function() {
