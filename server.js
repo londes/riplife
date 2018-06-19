@@ -54,15 +54,14 @@ app.use(function(req, res, next) {
 
 //now we can set the route path & initialize the API
 router.get('/', function(req, res) {
- //res.json({ message: 'API Initialized'}); // send index.html
- res.sendFile(__dirname, '/build/index.html');
+ res.json({ message: 'API Initialized'}); // send index.html
+ //res.sendFile(__dirname, '/build/index.html');
 });
 
 //adding the /videos route to our /api router
 router.route('/videos')
   //retrieve all videos from db
 
-  // 2018-03-29 -- this is where we may be able to filter the get request by checking for verified
   .get(function(req,res) {
     //looks at our Video Schema
     Video.find(function(err, videos) {
@@ -153,7 +152,7 @@ router.route('/videos')
           });
       })
 //Use our router configuration when we call /api
-app.use('/api', router);
+app.use('/', router);
 
 //starts the server and listens for requests
 app.listen(port, function() {
