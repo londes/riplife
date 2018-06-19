@@ -12,6 +12,7 @@ var fs = require('fs');
 //and create our instances
 var app = express();
 var router = express.Router();
+var path = require('path');
 
 // parse our local-settings.json to pull in appropriate credentials
 // var localSettingsContents = fs.readFileSync("local-settings.json");
