@@ -152,8 +152,8 @@ router.route('/videos')
             res.json(videos)
           });
       })
-//Use our router configuration when we call /
-app.use('/', router);
+//Use our router configuration when we call /api
+app.use('/api', router);
 
 //starts the server and listens for requests
 app.listen(port, function() {
