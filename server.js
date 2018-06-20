@@ -42,7 +42,7 @@ app.use(bodyParser.json());
 
 //set up static hosting
 app.use('/static', express.static(path.join(__dirname, '/build/static')));
-app.use('/img', express.static(path.join(__dirname, '/build/img'));
+app.use('/img', express.static(path.join(__dirname, '/build/img')));
 
 //To prevent errors from Cross Origin Resource Sharing, we will set
 //our headers to allow CORS with middleware like so:
