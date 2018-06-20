@@ -40,6 +40,9 @@ mongoose.connect(`mongodb://${db_username}:${db_password}@ds115446.mlab.com:1544
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//set up static hosting
+app.use('/static', express.static(path.join(__dirname, '/build/static')))
+
 //To prevent errors from Cross Origin Resource Sharing, we will set
 //our headers to allow CORS with middleware like so:
 app.use(function(req, res, next) {
