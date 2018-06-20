@@ -76,7 +76,7 @@ class App extends Component {
             containerWidth={document.body.scrollWidth}
             containerHeight={document.body.scrollHeight}
             howMany={2000}
-            imgSrc={"/static/img/monkaS.png"}/>
+            imgSrc={"/img/monkaS.png"}/>
           {this.renderVideos()}
         </div>
       </div>
