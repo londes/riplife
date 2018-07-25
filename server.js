@@ -59,20 +59,17 @@ app.use(function(req, res, next) {
 
 //now we can set the route path & initialize the API
 router.get('/', function(req, res) {
- //res.json({ message: 'API Initialized'}); // send index.html
  res.sendFile(path.join(__dirname, '/build/', 'index.html'));
 });
 
-//adding the /videos route to our /api router
+//adding the /videos route to our router
 router.route('/videos')
   //retrieve all videos from db
-
   .get(function(req,res) {
     //looks at our Video Schema
     Video.find(function(err, videos) {
       if (err)
       res.send(err);
-      //responds with a json object of our database videos.
       res.json(videos)
     });
   })
@@ -113,7 +110,7 @@ router.route('/videos')
       console.log(message);
       var messagesStrings = message.split(' ');
       var ripOrFake = messagesStrings[0].toLowerCase();
-      if ((ripOrFake === 'rip' || ripOrFake === 'fake') && (messagesStrings.length > 1)){
+      if ((ripOrFake === 'rip' || ripOrFake === 'fake') && (messagesStrings.length > 1)) {
         var vidId = messagesStrings[1];
         console.log("rip or fake: " + ripOrFake + ", vid id: " + vidId);
         Video.findOne({clipId: vidId}, function(err, video){
