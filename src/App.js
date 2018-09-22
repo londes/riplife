@@ -24,7 +24,7 @@ class App extends Component {
     fetch('https://rippy-app.herokuapp.com/last5rips')
       .then(response => {
         return response.json();
-      })
+      })  
       .then(responseJson => {
         console.log(responseJson);
         this.setState({
